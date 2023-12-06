@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene background="color:black">
+    <a-assets>
+      <!-- Use the raw link to your glTF model -->
+      <a-asset-item id="tree" src="https://github.com/Ci892/snow_try/blob/main/Snow_try/assets/Winter_tree.gltf"></a-asset-item>
+    </a-assets>
+    <a-camera>
+      <a-entity cursor='fuse: true; fuseTimeout: 4000' position="0 0 -1" geometry="primitive: sphere; radius: 0.01" material="color: black; shader: flat; opacity: 0.5"></a-entity>
+    </a-camera>
+    <!-- Use the glTF model in your scene -->
+    <a-entity gltf-model="#tree"></a-entity>
+  </a-scene>
+</body>
+</html>
