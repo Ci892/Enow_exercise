@@ -1,24 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" title="snow_exercice">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
 </head>
 <body>
   <a-scene background="color:black">
     <a-assets>
-      <!-- Use the raw link to your glTF model -->
-      <img id="image_360" src="assets/starry_sky.webp" alt="Starry Sky" crossorigin="anonymous">
-      <img id="snow_texture" src="https://github.com/Ci892/snow_try/assets/th-4282920601.jpg" alt="Snow Texture">
+      
+      <img id="starry_sky" src="assets/starry_sky.webp" alt="Starry Sky" crossorigin="anonymous">
+      <img id="snow_texture" src="assets/snow2024.png" alt="Snow Texture" crossorigin="anonymous">
+      <a-gltf-model id="winter_tree_model" src="assets/Winter_tree.gltf" alt="Winter tree" crossorigin="anonymous"></a-gltf-model>
+      <a-video id="snow_fall" src="assets/snowfall24.mp4" autoplay loop="true"></a-video>
+      <audio id="wind-noise" src="assets/454213__kyles__swirling-winter-wind-gusty-grains-sand.flac"></audio>
     </a-assets>
+   
     <a-camera>
-      <a-entity cursor='fuse: true; fuseTimeout: 4000' position="0 0 -1" geometry="primitive: sphere; radius: 0.01" material="color: black; shader: flat; opacity: 0.5"></a-entity>
+      <!-- Vignette gif -->
+      <a-entity camera look-controls>
+        <a-video src="#snow_gif" position="0 0 -0.02" scale="2.38276 1.76765 1" material="opacity: 0.5" geometry=""> </a-video>
+    </a-entity>
+    <!-- fuse cursor -->
+      <a-entity
+      animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.09 0.09 0.001; to: 0.3 0.3 0.001"
+      animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0.3 0.3 0.001; to: 0.1 0.1 0.1"
+      animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0.3 0.3 0.001"
+      cursor="fuse: true;"
+      material="color: black; shader: flat"
+      position="0 0 -3"
+      geometry="primitive: ring"
+      scale="0.05762 0.0686 0.001" >
+    
+    </a-entity>
+
+      </a-entity> 
     </a-camera>
-    <a-entity light="intensity: 0.11; groundColor: #ffffff; color: #ffffff; castShadow: true" position="0 3.99643 0" id="moon-light"></a-entity>    <!-- Plane with the snow texture- doesn't work  -->
-    <a-plane rotation="-90 0 0" width="10" height="10" material="" geometry="width: 30; height: 30" id="ground-plane"></a-plane>
-    <!-- Sky with the starry sky texture -->
-    <a-sky src="#image_360"></a-sky>
+    <a-sky src="#starry_sky"></a-sky>
+    <a-plane rotation="-90 0 0" width="10" height="10" src="#snow_texture" geometry="width: 30; height: 30" id="ground-plane"></a-plane>
+    <!-- modèle 3D avec bruit-->
+    <a-entity gltf-model="#winter_tree_model" position="0 1.73385 0" shadow
+    event-set__enter="_event: mouseenter; color: #026fc9"
+    event-set__leave="_event: mouseleave; color: #4CC3D9"
+    <a-animation attribute="" dur="1500" begin="click"></a-animation>>
+      <a-sound src="assets/244942__spoonbender__wind-through-trees-3b.wav" autoplay="true" ></a-sound>
+    </a-entity>
+    </a-entity>
+    
+    <audio src="wind-noise"autoplay preload></audio>
+      
   </a-scene>
 </body>
 </html>
+
+<!-- issues: 3d model deos not show, vignette video does not appear, gif ????-->
