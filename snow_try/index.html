@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-html lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,9 @@ html lang="en">
     <a-assets>
       <img id="starry-sky" src="assets/starry_sky.webp" alt="Starry Sky" crossorigin="anonymous">
       <img id="snow-texture" src="assets/snow2024.png" alt="Snow Texture" crossorigin="anonymous">
-      <a-asset-item id="tree-obj" src="assets/lowpoyltree.obj"></a-asset-item>
+      <a-gltf-model id="tree-3d" src="assets/lowpolytree.gltf"></a-gltf-model>
+      <a-gltf-model id="hut-3d" src="assets/lowpolyhut.gltf"></a-gltf-model>
+      <a-gltf-model id="lamp-3d" src="assets/lowpolylamp.gltf"></a-gltf-model>
       <a-video id="snow-fall" src="assets/snow.gif" autoplay loop="true"></a-video>
       <audio id="wind-noise" src="assets/454213__kyles__swirling-winter-wind-gusty-grains-sand.flac"></audio>
       <audio id="tree-noise" src="assets/244942__spoonbender__wind-through-trees-3b.wav"></audio>
@@ -41,11 +43,14 @@ html lang="en">
     <a-light></a-light>
     <a-plane rotation="-90 0 0" width="10" height="10" src="#snow-texture" geometry="width: 30; height: 30" id="ground-plane"></a-plane>
     <!-- modèle 3D n'apparait pas, avec bruit-->
-    <a-entity obj-model="#tree-obj" position="0 1.73385 0" shadow
+    <a-entity gltf-model="#tree-3d" position="0 1.73385 0" shadow
       event-set__enter="_event: mouseenter; color: #026fc9"
       event-set__leave="_event: mouseleave; color: #4CC3D9" 
       animation__click="startEvents: click; easing: easeInCubic; dur: 1500;" sound="src: #tree-noise">
     </a-entity>
+    <a-entity gltf-model="#hut-3d" ></a-entity>
+    <a-entity gltf-model="#lamp-3d"></a-entity>
+    
     <audio src="#wind-noise" autoplay preload></audio>
     <a-entity light="type: ambient; color: #BBB"></a-entity>
     <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
